@@ -17,6 +17,7 @@ namespace ClaimSystem.Data.Configurations
                 .WithOptional(a => a.Employee)
                 .WillCascadeOnDelete(false);
 
+
         }
     }
 }

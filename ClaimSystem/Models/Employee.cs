@@ -21,6 +21,8 @@ namespace ClaimSystem.Models
         [Required, StringLength(254)]
         public string Email { get; set; }
         [Required]
+        public string Password { get; set; }
+        [Required]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Telefono invalido")]
         [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Telefono invalido.")]
         public string PhoneNumber { get; set; }

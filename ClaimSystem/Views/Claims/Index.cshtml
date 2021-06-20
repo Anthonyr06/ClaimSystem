@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ClaimSystem.Models.Claim>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClaimPriority.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClaimState.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClaimType.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.Cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SolutionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Solution)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClaimPriority.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClaimState.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClaimType.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Cedula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.Cedula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SolutionDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Solution)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ClaimId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ClaimId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ClaimId })
+        </td>
+    </tr>
+}
+
+</table>

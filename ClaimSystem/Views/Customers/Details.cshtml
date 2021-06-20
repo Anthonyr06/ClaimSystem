@@ -9,72 +9,56 @@
 <div>
     <h4>Customer</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Address.Neighborhood)
-        </dt>
+	<dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Address.Neighborhood)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Cedula)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cedula)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.Cedula)
+		</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cedula)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.LastName)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.LastName)
+		</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Email)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.Email)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.PhoneNumber)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.PhoneNumber)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Address)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.Address.FullAddress)
+		</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddressId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddressId)
-        </dd>
-
-    </dl>
+	</dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerId }) |

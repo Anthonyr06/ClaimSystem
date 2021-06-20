@@ -23,6 +23,10 @@ namespace ClaimSystem.Models
 
         public Customer Customer { get; set; }
         public Employee Employee  { get; set; }
+
+        [NotMapped]
+        public string FullAddress => string.Format("{0} #{1}, {2}, {3}, {4} ", AddressType.ToString(), Number, Neighborhood, City, Country);
+
     }
 
     public enum AddressType

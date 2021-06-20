@@ -139,9 +139,9 @@
     <Compile Include="Data\Configurations\CustomerConfig.cs" />
     <Compile Include="Data\Configurations\EmployeeConfig.cs" />
     <Compile Include="Data\Configurations\PositionConfig.cs" />
-    <Compile Include="Data\Migrations\202106200523031_InitialMigration.cs" />
-    <Compile Include="Data\Migrations\202106200523031_InitialMigration.designer.cs">
-      <DependentUpon>202106200523031_InitialMigration.cs</DependentUpon>
+    <Compile Include="Data\Migrations\202106200837411_InitialMigration.cs" />
+    <Compile Include="Data\Migrations\202106200837411_InitialMigration.designer.cs">
+      <DependentUpon>202106200837411_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -258,8 +258,8 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Migrations\202106200523031_InitialMigration.resx">
-      <DependentUpon>202106200523031_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Data\Migrations\202106200837411_InitialMigration.resx">
+      <DependentUpon>202106200837411_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

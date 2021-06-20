@@ -47,7 +47,7 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Claim Claim = _claims.GetByID(id);
+            Claim Claim = _claims.Get(c => c.ClaimId == id, null, "ClaimPriority,ClaimState,ClaimType,Customer,Employee").FirstOrDefault();
             if (Claim == null)
             {
                 return HttpNotFound();
@@ -109,11 +109,22 @@ namespace WebApplication1.Controllers
         // POST: Claims/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Desc,StartDate,SolutionDate,Solution,ClaimTypeId,ClaimStateId,ClaimPriorityId,EmployeeId,CustomerId")] Claim Claim)
+        public ActionResult Edit(Claim Claim)
         {
             if (ModelState.IsValid)
             {
-                _claims.Update(Claim);
+                Claim c = _claims.GetByID(Claim.ClaimId);
+                c.Desc = Claim.Desc;
+                c.StartDate = Claim.StartDate;
+                c.SolutionDate = Claim.SolutionDate;
+                c.Solution = Claim.Solution;
+                c.ClaimTypeId = Claim.ClaimTypeId;
+                c.ClaimStateId = Claim.ClaimStateId;
+                c.ClaimPriorityId = Claim.ClaimPriorityId;
+                c.CustomerId = Claim.CustomerId;
+                c.EmployeeId = Claim.EmployeeId;
+
+                _claims.Update(c);
                 _claims.SaveObjects();
                 return RedirectToAction("Index");
             }
@@ -132,7 +143,7 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Claim Claim = _claims.GetByID(id);
+            Claim Claim = _claims.Get(c => c.ClaimId == id, null, "ClaimPriority,ClaimState,ClaimType,Customer,Employee").FirstOrDefault();
             if (Claim == null)
             {
                 return HttpNotFound();

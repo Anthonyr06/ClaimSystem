@@ -11,13 +11,14 @@ namespace ClaimSystem.Models
     public class Claim
     {
         public int ClaimId { get; set; }
-        [Required, MaxLength(500, ErrorMessage = "Maximo 500 caracteres")]
+        [Required, MaxLength(500, ErrorMessage = "Maximo 500 caracteres"),Display(Name = "Descripcion")]
         public string Desc { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
-        [Required]
+        [DataType(DataType.Date)]
         public DateTime SolutionDate { get; set; }
-        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
+        [MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
         public string Solution { get; set; }
 
         public int ClaimTypeId { get; set; }

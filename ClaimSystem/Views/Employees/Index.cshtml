@@ -12,10 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Address.Neighborhood)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Position.Name)
+            @Html.DisplayNameFor(model => model.Position)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Cedula)
@@ -30,25 +27,19 @@
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AdmissionDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AddressId)
+            @Html.DisplayNameFor(model => model.Address)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address.Neighborhood)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Position.Name)
         </td>
@@ -65,17 +56,14 @@
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.PhoneNumber)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AdmissionDate)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AddressId)
-        </td>
+		<td>
+			@Html.DisplayFor(model => item.Address.FullAddress)
+		</td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeId }) |
             @Html.ActionLink("Details", "Details", new { id=item.EmployeeId }) |

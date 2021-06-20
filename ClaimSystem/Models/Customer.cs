@@ -21,6 +21,7 @@ namespace ClaimSystem.Models
         [Required, StringLength(254)]
         public string Email { get; set; }
         [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required]
         [DataType(DataType.PhoneNumber, ErrorMessage = "Telefono invalido")]

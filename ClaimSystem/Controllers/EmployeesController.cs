@@ -38,7 +38,7 @@ namespace ClaimSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = _employees.GetByID(id);
+            Employee employee = _employees.Get(e => e.EmployeeId == id, null, "Address,Position").FirstOrDefault();
             if (employee == null)
             {
                 return HttpNotFound();
@@ -49,7 +49,7 @@ namespace ClaimSystem.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            ViewBag.EmployeeId = new SelectList(_addresses.Get(), "AddressId", "Neighborhood");
+            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress));
             ViewBag.PositionId = new SelectList(_positions.Get(), "PositionId", "Name");
             return View();
         }
@@ -62,9 +62,10 @@ namespace ClaimSystem.Controllers
             {
                 var check = _employees.Get(e => e.Email == employee.Email.Trim().ToLower());
 
-                if (check == null)
+                if (!check.Any())
                 {
                     employee.Password = MD5Service.GetMD5(employee.Password);
+                    employee.Address = _addresses.GetByID(employee.AddressId);
                     _employees.Insert(employee);
                     _employees.SaveObjects();
                     return RedirectToAction("Index");
@@ -72,7 +73,7 @@ namespace ClaimSystem.Controllers
 
             }
 
-            ViewBag.EmployeeId = new SelectList(_addresses.Get(), "AddressId", "Neighborhood", employee.EmployeeId);
+            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), employee.AddressId);
             ViewBag.PositionId = new SelectList(_positions.Get(), "PositionId", "Name", employee.PositionId);
 
             ModelState.AddModelError("", "El usuario ya existe");
@@ -91,23 +92,34 @@ namespace ClaimSystem.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.EmployeeId = new SelectList(_addresses.Get(), "AddressId", "Neighborhood", employee.EmployeeId);
+            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), employee.AddressId);
             ViewBag.PositionId = new SelectList(_positions.Get(), "PositionId", "Name", employee.PositionId);
             return View(employee);
         }
 
         // POST: Employees/Edit/5
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Cedula,Name,LastName,Email,Password,PhoneNumber,AdmissionDate,PositionId,AddressId")] Employee employee)
+        public ActionResult Edit(Employee employee)
         {
+            ModelState.Remove("Password");
             if (ModelState.IsValid)
             {
-                _employees.Update(employee);
+                Employee e = _employees.GetByID(employee.EmployeeId);
+                e.Cedula = employee.Cedula;
+                e.Name = employee.Name;
+                e.LastName = employee.LastName;
+                e.Email = employee.Email;
+                e.PhoneNumber = employee.PhoneNumber;
+                e.AdmissionDate = employee.AdmissionDate;
+                e.PositionId = employee.PositionId;
+                e.AddressId = employee.AddressId;
+
+                _employees.Update(e);
                 _employees.SaveObjects();
 
                 return RedirectToAction("Index");
             }
-            ViewBag.EmployeeId = new SelectList(_addresses.Get(), "AddressId", "Neighborhood", employee.EmployeeId);
+            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), employee.AddressId);
             ViewBag.PositionId = new SelectList(_positions.Get(), "PositionId", "Name", employee.PositionId);
             return View(employee);
         }
@@ -119,7 +131,7 @@ namespace ClaimSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = _employees.GetByID(id);
+            Employee employee = _employees.Get(e => e.EmployeeId == id, null, "Address,Position").FirstOrDefault();
             if (employee == null)
             {
                 return HttpNotFound();

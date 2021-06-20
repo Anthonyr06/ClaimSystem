@@ -13,7 +13,7 @@ namespace ClaimSystem.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202106200523031_InitialMigration"; }
+            get { return "202106200837411_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

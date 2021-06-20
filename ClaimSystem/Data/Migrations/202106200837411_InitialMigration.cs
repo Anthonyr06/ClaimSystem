@@ -24,7 +24,7 @@
                 "dbo.Customers",
                 c => new
                     {
-                        CustomerId = c.Int(nullable: false, identity: true),
+                        CustomerId = c.Int(nullable: false),
                         Cedula = c.String(nullable: false, maxLength: 11),
                         Name = c.String(nullable: false, maxLength: 100),
                         LastName = c.String(nullable: false, maxLength: 200),
@@ -46,7 +46,7 @@
                         Desc = c.String(nullable: false, maxLength: 500),
                         StartDate = c.DateTime(nullable: false),
                         SolutionDate = c.DateTime(nullable: false),
-                        Solution = c.String(nullable: false, maxLength: 200),
+                        Solution = c.String(maxLength: 200),
                         ClaimTypeId = c.Int(nullable: false),
                         ClaimStateId = c.Int(nullable: false),
                         ClaimPriorityId = c.Int(nullable: false),
@@ -96,7 +96,7 @@
                 "dbo.Employees",
                 c => new
                     {
-                        EmployeeId = c.Int(nullable: false, identity: true),
+                        EmployeeId = c.Int(nullable: false),
                         Cedula = c.String(nullable: false, maxLength: 11),
                         Name = c.String(nullable: false, maxLength: 100),
                         LastName = c.String(nullable: false, maxLength: 200),

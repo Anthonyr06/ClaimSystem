@@ -10,7 +10,7 @@ using System.Web.Mvc;
 using ClaimSystem.Models;
 using ClaimSystem.Services;
 
-namespace WebApplication1.Controllers
+namespace ClaimSystem.Controllers
 {
     public class CustomersController : Controller
     {
@@ -38,7 +38,7 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = _customers.GetByID(id);
+            Customer customer = _customers.Get(c => c.CustomerId == id, null, "Address").FirstOrDefault();
             if (customer == null)
             {
                 return HttpNotFound();
@@ -49,7 +49,7 @@ namespace WebApplication1.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerId = new SelectList(_addresses.Get(), "AddressId", "Neighborhood");
+            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress));
             return View();
         }
 
@@ -63,16 +63,17 @@ namespace WebApplication1.Controllers
             {
                 var check = _customers.Get(e => e.Email == customer.Email.Trim().ToLower());
 
-                if (check == null)
+                if (!check.Any())
                 {
                     customer.Password = MD5Service.GetMD5(customer.Password);
+                    customer.Address = _addresses.GetByID(customer.AddressId);
                     _customers.Insert(customer);
                     _customers.SaveObjects();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index");
                 }
 
             }
-            ViewBag.CustomerId = new SelectList(_addresses.Get(), "AddressId", "Neighborhood", customer.CustomerId);
+            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), customer.AddressId);
             ModelState.AddModelError("", "El usuario ya existe");
             return View();
         }
@@ -89,22 +90,31 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(_addresses.Get(), "AddressId", "Neighborhood", customer.CustomerId);
+            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), customer.AddressId);
             return View(customer);
         }
 
         // POST: Customers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Cedula,Name,LastName,Email,Password,PhoneNumber,AddressId")] Customer customer)
+        public ActionResult Edit(Customer customer)
         {
+            ModelState.Remove("Password");
             if (ModelState.IsValid)
             {
-                _customers.Update(customer);
+                Customer c = _customers.GetByID(customer.CustomerId);
+                c.Cedula = customer.Cedula;
+                c.Name = customer.Name;
+                c.LastName = customer.LastName;
+                c.Email = customer.Email;
+                c.PhoneNumber = customer.PhoneNumber;
+                c.AddressId = customer.AddressId;
+
+                _customers.Update(c);
                 _customers.SaveObjects();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(_addresses.Get(), "AddressId", "Neighborhood", customer.CustomerId);
+            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), customer.AddressId);
             return View(customer);
         }
 
@@ -115,7 +125,7 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = _customers.GetByID(id);
+            Customer customer = _customers.Get(c => c.CustomerId == id, null, "Address").FirstOrDefault();
             if (customer == null)
             {
                 return HttpNotFound();

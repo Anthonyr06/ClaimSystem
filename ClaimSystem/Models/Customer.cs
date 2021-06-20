@@ -10,6 +10,7 @@ namespace ClaimSystem.Models
     [Table("Customers")]
     public class Customer
     {
+        [Key]
         public int CustomerId { get; set; }
         [Required, StringLength(11)]
         public string Cedula { get; set; }

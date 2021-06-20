@@ -143,6 +143,10 @@
     <Compile Include="Data\Migrations\202106200837411_InitialMigration.designer.cs">
       <DependentUpon>202106200837411_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\202106202228340_ClaimSolutionNoRequired.cs" />
+    <Compile Include="Data\Migrations\202106202228340_ClaimSolutionNoRequired.designer.cs">
+      <DependentUpon>202106202228340_ClaimSolutionNoRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -260,6 +264,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\Migrations\202106200837411_InitialMigration.resx">
       <DependentUpon>202106200837411_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\202106202228340_ClaimSolutionNoRequired.resx">
+      <DependentUpon>202106202228340_ClaimSolutionNoRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

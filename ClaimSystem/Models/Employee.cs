@@ -10,6 +10,7 @@ namespace ClaimSystem.Models
     [Table("Employees")]
     public class Employee
     {
+        [Key]
         public int EmployeeId { get; set; }
         [Required, StringLength(11)]
         public string Cedula { get; set; }

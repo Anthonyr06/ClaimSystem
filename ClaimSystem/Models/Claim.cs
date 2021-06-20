@@ -17,7 +17,7 @@ namespace ClaimSystem.Models
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
         [DataType(DataType.Date)]
-        public DateTime SolutionDate { get; set; }
+        public DateTime? SolutionDate { get; set; }
         [MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
         public string Solution { get; set; }
 

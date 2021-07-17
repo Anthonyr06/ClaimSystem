@@ -11,7 +11,7 @@ using ClaimSystem.Models;
 using ClaimSystem.Services;
 using ClaimSystem.Data;
 
-namespace WebApplication1.Controllers
+namespace ClaimSystem.Controllers
 {
     public class ClaimsController : Controller
     {

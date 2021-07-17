@@ -33,7 +33,7 @@ namespace ClaimSystem.Models
     {
         [Display(Name = "Casa")]
         house = 0,
-        [Display(Name = "Departamento")]
+        [Display(Name = "Apartamento")]
         depto = 1 
     }
 }

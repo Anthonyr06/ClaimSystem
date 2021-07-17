@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+	@Styles.Render("~/Content/css")
+	@Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
 	@if (User.Identity.IsAuthenticated)
@@ -20,19 +20,41 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarText">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						@{var current = ViewContext.RouteData.Values["controller"].ToString();
+							var active = "nav-link active rounded-pill bg-primary text-white";}
 						<li class="nav-item">
-							@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link active" })
+							@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = current == "Home" ? active : "nav-link" })
 						</li>
 						<li class="nav-item">
-							@Html.ActionLink("Reclamaciones", "Index", "Claims", null, new { @class = "nav-link" })
+							@Html.ActionLink("Reclamaciones", "Index", "Claims", null, new { @class = current == "Claims" ? active : "nav-link" })
 						</li>
 						<li class="nav-item">
-							@Html.ActionLink("Clientes", "Index", "Customers", null, new { @class = "nav-link" })
+							@Html.ActionLink("Clientes", "Index", "Customers", null, new { @class = current == "Customers" ? active : "nav-link" })
 						</li>
 						<li class="nav-item">
-							@Html.ActionLink("Empleados", "Index", "Employees", null, new { @class = "nav-link" })
+							@Html.ActionLink("Empleados", "Index", "Employees", null, new { @class = current == "Employees" ? active : "nav-link" })
+						</li>
+						<li class="nav-item">
+							@Html.ActionLink("Direcciones", "Index", "Addresses", null, new { @class = current == "Addresses" ? active : "nav-link" })
+						</li>
+						<li class="nav-item">
+							@Html.ActionLink("Prioridades reclamacion", "Index", "ClaimPriorities", null, new { @class = current == "ClaimPriorities" ? active : "nav-link" })
+						</li>
+						<li class="nav-item">
+							@Html.ActionLink("Estados reclamacion", "Index", "ClaimStates", null, new { @class = current == "ClaimStates" ? active : "nav-link" })
+						</li>
+						<li class="nav-item">
+							@Html.ActionLink("Tipos reclamacion", "Index", "ClaimTypes", null, new { @class = current == "ClaimTypes" ? active : "nav-link" })
+						</li>
+						<li class="nav-item">
+							@Html.ActionLink("Departamentos", "Index", "Departments", null, new { @class = current == "Departments" ? active : "nav-link" })
+						</li>
+						<li class="nav-item">
+							@Html.ActionLink("Puestos", "Index", "Positions", null, new { @class = current == "Positions" ? active : "nav-link" })
 						</li>
 					</ul>
+					@*current == "Addresses" ? "active" : ""*@
+
 					<ul class="navbar-nav ml-auto mb-2 mb-lg-0">
 						<li class="nav-item">@Html.ActionLink("Cerrar Sesión", "Logout", "Account", null, new { @class = "nav-item nav-link" })</li>
 					</ul>

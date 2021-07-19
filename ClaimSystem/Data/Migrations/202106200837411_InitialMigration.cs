@@ -137,7 +137,7 @@
                         DepartmentId = c.Int(nullable: false, identity: true),
                         Room = c.String(nullable: false, maxLength: 200),
                         ProcessingPlant = c.String(nullable: false, maxLength: 200),
-                        Workshop = c.String(nullable: false, maxLength: 200),
+                        Desc = c.String(nullable: false, maxLength: 200),
                     })
                 .PrimaryKey(t => t.DepartmentId);
             

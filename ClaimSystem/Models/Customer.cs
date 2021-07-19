@@ -29,7 +29,7 @@ namespace ClaimSystem.Models
         [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Telefono invalido.")]
         public string PhoneNumber { get; set; }
 
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
         public Address Address { get; set; }
 
         public IList<Claim> Claims { get; set; }

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace ClaimSystem.Controllers
 {
+    [Authorize(Roles = nameof(Employee))]
     public class EmployeesController : Controller
     {
 
@@ -49,7 +50,9 @@ namespace ClaimSystem.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress));
+            ViewBag.AddressId = new SelectList(
+                _addresses.Get(a => !a.Employees.Any() && !a.Customers.Any(), null, nameof(Address.Customers) + "," + nameof(Address.Employees)),
+                "AddressId", nameof(Address.FullAddress));
             ViewBag.PositionId = new SelectList(_positions.Get(), "PositionId", "Name");
             return View();
         }
@@ -65,7 +68,7 @@ namespace ClaimSystem.Controllers
                 if (!check.Any())
                 {
                     employee.Password = MD5Service.GetMD5(employee.Password);
-                    employee.Address = _addresses.GetByID(employee.AddressId);
+                    employee.Address = _addresses.GetByID(employee.Address.AddressId);
                     _employees.Insert(employee);
                     _employees.SaveObjects();
                     return RedirectToAction("Index");
@@ -73,7 +76,9 @@ namespace ClaimSystem.Controllers
 
             }
 
-            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), employee.AddressId);
+            ViewBag.AddressId = new SelectList(
+                _addresses.Get(a => !a.Employees.Any() && !a.Customers.Any(), null, nameof(Address.Customers) + "," + nameof(Address.Employees))
+                , "AddressId", nameof(Address.FullAddress), employee.AddressId);
             ViewBag.PositionId = new SelectList(_positions.Get(), "PositionId", "Name", employee.PositionId);
 
             ModelState.AddModelError("", "El usuario ya existe");
@@ -92,7 +97,9 @@ namespace ClaimSystem.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), employee.AddressId);
+            ViewBag.AddressId = new SelectList(
+                _addresses.Get(a => a.AddressId == employee.AddressId || (!a.Employees.Any() && !a.Customers.Any()), null, nameof(Address.Customers) + "," + nameof(Address.Employees)),
+                "AddressId", nameof(Address.FullAddress), employee.AddressId);
             ViewBag.PositionId = new SelectList(_positions.Get(), "PositionId", "Name", employee.PositionId);
             return View(employee);
         }
@@ -119,7 +126,9 @@ namespace ClaimSystem.Controllers
 
                 return RedirectToAction("Index");
             }
-            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), employee.AddressId);
+            ViewBag.AddressId = new SelectList(
+                    _addresses.Get(a => a.AddressId == employee.AddressId || (!a.Employees.Any() && !a.Customers.Any()), null, nameof(Address.Customers) + "," + nameof(Address.Employees)),
+                    "AddressId", nameof(Address.FullAddress), employee.AddressId);
             ViewBag.PositionId = new SelectList(_positions.Get(), "PositionId", "Name", employee.PositionId);
             return View(employee);
         }
@@ -149,5 +158,7 @@ namespace ClaimSystem.Controllers
             _employees.SaveObjects();
             return RedirectToAction("Index");
         }
+
+
     }
 }

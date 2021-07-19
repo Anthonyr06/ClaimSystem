@@ -12,11 +12,9 @@ namespace ClaimSystem.Models
     {
         public int DepartmentId { get; set; }
         [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
-        public string Room { get; set; }
+        public string Name { get; set; }
         [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
-        public string ProcessingPlant{ get; set; }
-        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
-        public string Workshop { get; set; }
+        public string Desc { get; set; }
 
         public IList<Position> Positions { get; set; }
     }

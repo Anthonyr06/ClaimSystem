@@ -25,49 +25,67 @@
 						<li class="nav-item">
 							@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = current == "Home" ? active : "nav-link" })
 						</li>
-						<li class="nav-item">
-							@Html.ActionLink("Reclamaciones", "Index", "Claims", null, new { @class = current == "Claims" ? active : "nav-link" })
-						</li>
-						<li class="nav-item">
-							@Html.ActionLink("Clientes", "Index", "Customers", null, new { @class = current == "Customers" ? active : "nav-link" })
-						</li>
-						<li class="nav-item">
-							@Html.ActionLink("Empleados", "Index", "Employees", null, new { @class = current == "Employees" ? active : "nav-link" })
-						</li>
-						<li class="nav-item">
-							@Html.ActionLink("Direcciones", "Index", "Addresses", null, new { @class = current == "Addresses" ? active : "nav-link" })
-						</li>
-						<li class="nav-item">
-							@Html.ActionLink("Prioridades reclamacion", "Index", "ClaimPriorities", null, new { @class = current == "ClaimPriorities" ? active : "nav-link" })
-						</li>
-						<li class="nav-item">
-							@Html.ActionLink("Estados reclamacion", "Index", "ClaimStates", null, new { @class = current == "ClaimStates" ? active : "nav-link" })
-						</li>
-						<li class="nav-item">
-							@Html.ActionLink("Tipos reclamacion", "Index", "ClaimTypes", null, new { @class = current == "ClaimTypes" ? active : "nav-link" })
-						</li>
-						<li class="nav-item">
-							@Html.ActionLink("Departamentos", "Index", "Departments", null, new { @class = current == "Departments" ? active : "nav-link" })
-						</li>
-						<li class="nav-item">
-							@Html.ActionLink("Puestos", "Index", "Positions", null, new { @class = current == "Positions" ? active : "nav-link" })
-						</li>
+						@if (User.IsInRole("Employee"))
+						{
+							<li class="nav-item">
+								@Html.ActionLink("Reclamaciones", "Index", "Claims", null, new { @class = current == "Claims" ? active : "nav-link" })
+							</li>
+							<li class="nav-item">
+								@Html.ActionLink("Clientes", "Index", "Customers", null, new { @class = current == "Customers" ? active : "nav-link" })
+							</li>
+							<li class="nav-item">
+								@Html.ActionLink("Empleados", "Index", "Employees", null, new { @class = current == "Employees" ? active : "nav-link" })
+							</li>
+							<li class="nav-item dropdown">
+								<a class="dropdown-toggle @(current=="Addresses"
+								||current == "ClaimStates" ||current == "ClaimTypes"
+								||current == "Departments" ||current == "Positions"
+								|| current=="ClaimPriorities"  ? active : "nav-link") "
+								   href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Mas...
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<li>
+										@Html.ActionLink("Direcciones", "Index", "Addresses", null, new { @class = current == "Addresses" ? "dropdown-item active" : "dropdown-item" })
+									</li>
+									<li>
+										@Html.ActionLink("Prioridades de reclamacion", "Index", "ClaimPriorities", null, new { @class = current == "ClaimPriorities" ? "dropdown-item active" : "dropdown-item" })
+									</li>
+									<li>
+										@Html.ActionLink("Estados de reclamacion", "Index", "ClaimStates", null, new { @class = current == "ClaimStates" ? "dropdown-item active" : "dropdown-item" })
+									</li>
+									<li>
+										@Html.ActionLink("Tipos de reclamacion", "Index", "ClaimTypes", null, new { @class = current == "ClaimTypes" ? "dropdown-item active" : "dropdown-item" })
+									</li>
+									<li>
+										@Html.ActionLink("Departamentos", "Index", "Departments", null, new { @class = current == "Departments" ? "dropdown-item active" : "dropdown-item" })
+									</li>
+									<li>
+										@Html.ActionLink("Puestos", "Index", "Positions", null, new { @class = current == "Positions" ? "dropdown-item active" : "dropdown-item" })
+									</li>
+								</ul>
+							</li>
+						}
+
 					</ul>
-					@*current == "Addresses" ? "active" : ""*@
 
 					<ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+						<li class="nav-item">@Html.ActionLink("Mi cuenta", "Admin", "Account", null, new { @class = current == "Account" ? active : "nav-link" })</li>
 						<li class="nav-item">@Html.ActionLink("Cerrar Sesión", "Logout", "Account", null, new { @class = "nav-item nav-link" })</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	}
-	<div class="container body-content">
+	<div class="container content">
 		@RenderBody()
+	</div>
+	<div class="container">
 		<hr />
 		<footer>
-			<p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+			<p>&copy; @DateTime.Now.Year - Sistema de quejas y reclamaciones</p>
 		</footer>
+
 	</div>
 
 	@Scripts.Render("~/bundles/jquery")

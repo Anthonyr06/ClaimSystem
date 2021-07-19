@@ -3,11 +3,13 @@
 @{
 	ViewBag.Title = "Iniciar Sesion";
 }
+@*<img src="~/Content/Images/bg-inbox.svg" style="position: fixed; top: 0; left: 0; min-width: 100%; min-height: 100%; " id="bg" alt="">*@
+
 @using (Html.BeginForm())
 {
 	@Html.AntiForgeryToken()
 
-	<div class="row">
+	<div class="row"> 
 		<div class="col-6 offset-3">
 
 			<div class="card text-center my-5">
@@ -30,8 +32,8 @@
 						<button type="submit" class="btn btn-primary rounded-pill ">Iniciar Sesión</button>
 					</div>
 					@*<div class="mb-3">
-						@Html.ActionLink("Nuevo empleado", "Register", null, new { @class = "card-link small " })
-					</div>*@
+							@Html.ActionLink("Nuevo empleado", "Register", null, new { @class = "card-link small " })
+						</div>*@
 
 				</div>
 			</div>

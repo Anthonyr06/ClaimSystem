@@ -12,6 +12,7 @@ using ClaimSystem.Services;
 
 namespace ClaimSystem.Controllers
 {
+    [Authorize(Roles = nameof(Employee))]
     public class PositionsController : Controller
     {
         private readonly RepositoryEF<Position> _positions;
@@ -49,7 +50,7 @@ namespace ClaimSystem.Controllers
         // GET: Positions/Create
         public ActionResult Create()
         {
-            ViewBag.DepartmentId = new SelectList(_departments.Get(), nameof(Department.DepartmentId), nameof(Department.Room));
+            ViewBag.DepartmentId = new SelectList(_departments.Get(), nameof(Department.DepartmentId), nameof(Department.Name));
             return View();
         }
 
@@ -65,7 +66,7 @@ namespace ClaimSystem.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.DepartmentId = new SelectList(_departments.Get(), nameof(Department.DepartmentId), nameof(Department.Room), position.DepartmentId);
+            ViewBag.DepartmentId = new SelectList(_departments.Get(), nameof(Department.DepartmentId), nameof(Department.Name), position.DepartmentId);
             return View(position);
         }
 
@@ -81,7 +82,7 @@ namespace ClaimSystem.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.DepartmentId = new SelectList(_departments.Get(), nameof(Department.DepartmentId), nameof(Department.Room), position.DepartmentId);
+            ViewBag.DepartmentId = new SelectList(_departments.Get(), nameof(Department.DepartmentId), nameof(Department.Name), position.DepartmentId);
             return View(position);
         }
 
@@ -104,7 +105,7 @@ namespace ClaimSystem.Controllers
 
                 return RedirectToAction("Index");
             }
-            ViewBag.DepartmentId = new SelectList(_departments.Get(), nameof(Department.DepartmentId), nameof(Department.Room), position.DepartmentId);
+            ViewBag.DepartmentId = new SelectList(_departments.Get(), nameof(Department.DepartmentId), nameof(Department.Name), position.DepartmentId);
             return View(position);
         }
 

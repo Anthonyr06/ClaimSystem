@@ -1,9 +1,24 @@
 ﻿body {
     padding-bottom: 20px;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+html {
+    background: url(Images/bg-inbox.svg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+html, body {
+    height: 100%;
+}
+.content {
+    flex: 1 0 auto;
+}
+
+.footer {
+    flex-shrink: 0;
 }

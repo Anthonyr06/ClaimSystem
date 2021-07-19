@@ -12,6 +12,7 @@ using ClaimSystem.Services;
 
 namespace ClaimSystem.Controllers
 {
+    [Authorize(Roles = nameof(Employee))]
     public class CustomersController : Controller
     {
         private readonly RepositoryEF<Customer> _customers;
@@ -38,6 +39,7 @@ namespace ClaimSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var cd = _customers.Get();
             Customer customer = _customers.Get(c => c.CustomerId == id, null, "Address").FirstOrDefault();
             if (customer == null)
             {
@@ -49,7 +51,9 @@ namespace ClaimSystem.Controllers
         // GET: Customers/Create
         public ActionResult Create()
         {
-            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress));
+            ViewBag.AddressId = new SelectList(
+                _addresses.Get(a => !a.Employees.Any() && !a.Customers.Any(), null, nameof(Address.Customers) + "," + nameof(Address.Employees)),
+                "AddressId", nameof(Address.FullAddress));
             return View();
         }
 
@@ -73,7 +77,9 @@ namespace ClaimSystem.Controllers
                 }
 
             }
-            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), customer.AddressId);
+            ViewBag.AddressId = new SelectList(
+                _addresses.Get(a => !a.Employees.Any() && !a.Customers.Any(), null, nameof(Address.Customers) + "," + nameof(Address.Employees))
+                , "AddressId", nameof(Address.FullAddress), customer.AddressId);
             ModelState.AddModelError("", "El usuario ya existe");
             return View();
         }
@@ -90,7 +96,9 @@ namespace ClaimSystem.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), customer.AddressId);
+            ViewBag.AddressId = new SelectList(
+                _addresses.Get(a => a.AddressId == customer.AddressId || (!a.Employees.Any() && !a.Customers.Any()), null, nameof(Address.Customers) + "," + nameof(Address.Employees)),
+                "AddressId", nameof(Address.FullAddress), customer.AddressId);
             return View(customer);
         }
 
@@ -103,6 +111,7 @@ namespace ClaimSystem.Controllers
             if (ModelState.IsValid)
             {
                 Customer c = _customers.GetByID(customer.CustomerId);
+
                 c.Cedula = customer.Cedula;
                 c.Name = customer.Name;
                 c.LastName = customer.LastName;
@@ -110,11 +119,16 @@ namespace ClaimSystem.Controllers
                 c.PhoneNumber = customer.PhoneNumber;
                 c.AddressId = customer.AddressId;
 
+                if (!string.IsNullOrWhiteSpace(customer.Password))
+                    c.Password = MD5Service.GetMD5(customer.Password);
+
                 _customers.Update(c);
                 _customers.SaveObjects();
                 return RedirectToAction("Index");
             }
-            ViewBag.AddressId = new SelectList(_addresses.Get(), "AddressId", nameof(Address.FullAddress), customer.AddressId);
+            ViewBag.AddressId = new SelectList(
+                _addresses.Get(a => a.AddressId == customer.AddressId || (!a.Employees.Any() && !a.Customers.Any()), null, nameof(Address.Customers) + "," + nameof(Address.Employees)),
+                "AddressId", nameof(Address.FullAddress), customer.AddressId);
             return View(customer);
         }
 

@@ -153,6 +153,18 @@
     <Compile Include="Data\Migrations\202106202228340_ClaimSolutionNoRequired.designer.cs">
       <DependentUpon>202106202228340_ClaimSolutionNoRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\202107171245194_DeptoTableUpdated.cs" />
+    <Compile Include="Data\Migrations\202107171245194_DeptoTableUpdated.designer.cs">
+      <DependentUpon>202107171245194_DeptoTableUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Migrations\202107180410068_AddressIdFKFieldDropped.cs" />
+    <Compile Include="Data\Migrations\202107180410068_AddressIdFKFieldDropped.designer.cs">
+      <DependentUpon>202107180410068_AddressIdFKFieldDropped.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Migrations\202107180420066_AddressRelationFixed.cs" />
+    <Compile Include="Data\Migrations\202107180420066_AddressRelationFixed.designer.cs">
+      <DependentUpon>202107180420066_AddressRelationFixed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -165,6 +177,7 @@
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MD5Service.cs" />
@@ -187,6 +200,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Images\bg-inbox.svg" />
+    <Content Include="Content\Images\proceso-quejas.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -288,6 +303,7 @@
     <Content Include="Views\Positions\Details.cshtml" />
     <Content Include="Views\Positions\Edit.cshtml" />
     <Content Include="Views\Positions\Index.cshtml" />
+    <Content Include="Views\Account\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -303,6 +319,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Data\Migrations\202106202228340_ClaimSolutionNoRequired.resx">
       <DependentUpon>202106202228340_ClaimSolutionNoRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\202107171245194_DeptoTableUpdated.resx">
+      <DependentUpon>202107171245194_DeptoTableUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\202107180410068_AddressIdFKFieldDropped.resx">
+      <DependentUpon>202107180410068_AddressIdFKFieldDropped.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\202107180420066_AddressRelationFixed.resx">
+      <DependentUpon>202107180420066_AddressRelationFixed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

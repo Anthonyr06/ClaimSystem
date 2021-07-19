@@ -34,7 +34,7 @@ namespace ClaimSystem.Models
         public int PositionId { get; set; }
         public Position Position { get; set; }
 
-        public int AddressId { get; set; }
+        public int? AddressId { get; set; }
         public Address Address { get; set; }
 
         public IList<Claim> Claims { get; set; }

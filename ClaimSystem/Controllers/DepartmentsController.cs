@@ -12,6 +12,7 @@ using ClaimSystem.Services;
 
 namespace ClaimSystem.Controllers
 {
+    [Authorize(Roles = nameof(Employee))]
     public class DepartmentsController : Controller
     {
         private readonly RepositoryEF<Department> _departments;
@@ -52,7 +53,7 @@ namespace ClaimSystem.Controllers
         // POST: Departments/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DepartmentId,Room,ProcessingPlant,Workshop")] Department department)
+        public ActionResult Create([Bind(Include = "DepartmentId,Name,Desc")] Department department)
         {
             if (ModelState.IsValid)
             {
@@ -87,9 +88,8 @@ namespace ClaimSystem.Controllers
             if (ModelState.IsValid)
             {
                 Department d = _departments.GetByID(department.DepartmentId);
-                d.Room = department.Room;
-                d.Workshop = department.Workshop;
-                d.ProcessingPlant = department.ProcessingPlant;
+                d.Name = department.Name;
+                d.Desc = department.Desc;
 
                 _departments.Update(d);
                 _departments.SaveObjects();

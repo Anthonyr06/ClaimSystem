@@ -12,6 +12,7 @@ using ClaimSystem.Services;
 
 namespace ClaimSystem.Controllers
 {
+    [Authorize(Roles = nameof(Employee))]
     public class ClaimPrioritiesController : Controller
     {
         private readonly RepositoryEF<ClaimPriority> _claimPriorities;

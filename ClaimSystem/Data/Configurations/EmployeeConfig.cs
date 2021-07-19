@@ -13,9 +13,9 @@ namespace ClaimSystem.Data.Configurations
         {
             HasIndex(e => e.Cedula).IsUnique();
                         
-            HasRequired(e => e.Address)
-                .WithOptional(a => a.Employee)
-                .WillCascadeOnDelete(false);
+            //HasRequired(e => e.Address)
+            //    .WithOptional(a => a.Employees)
+            //    .WillCascadeOnDelete(false);
 
 
         }

@@ -21,8 +21,8 @@ namespace ClaimSystem.Models
         [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
         public string Country { get; set; }
 
-        public Customer Customer { get; set; }
-        public Employee Employee  { get; set; }
+        public IList<Customer> Customers { get; set; }
+        public IList<Employee> Employees  { get; set; }
 
         [NotMapped]
         public string FullAddress => string.Format("{0} #{1}, {2}, {3}, {4} ", AddressType.ToString(), Number, Neighborhood, City, Country);

@@ -13,6 +13,7 @@ using ClaimSystem.Data;
 
 namespace ClaimSystem.Controllers
 {
+    [Authorize(Roles = nameof(Employee))]
     public class ClaimsController : Controller
     {
         private readonly RepositoryEF<Claim> _claims;

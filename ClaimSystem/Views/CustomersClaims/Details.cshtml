@@ -28,14 +28,6 @@
 		</dd>
 
 		<dt>
-			@Html.DisplayNameFor(model => model.ClaimPriority)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.ClaimPriority.Desc)
-		</dd>
-
-		<dt>
 			@Html.DisplayNameFor(model => model.ClaimState)
 		</dt>
 
@@ -51,18 +43,10 @@
 			@Html.DisplayFor(model => model.ClaimType.Desc)
 		</dd>
 
-		<dt>
-			@Html.DisplayNameFor(model => model.Customer)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.Customer.FullName) - @Html.DisplayFor(model => model.Customer.Cedula)
-		</dd>
 
 		<dt>
 			@Html.DisplayNameFor(model => model.Employee)
 		</dt>
-
 
 		<dd>
 
@@ -77,7 +61,6 @@
 		</dd>
 
 
-
 		<dt>
 			@Html.DisplayNameFor(model => model.StartDate)
 		</dt>
@@ -86,7 +69,7 @@
 			@Html.DisplayFor(model => model.StartDate)
 		</dd>
 
-		@if (Model.SolutionDate != null)
+		@if ( Model.SolutionDate != null)
 		{
 			<dt>
 				@Html.DisplayNameFor(model => model.SolutionDate)
@@ -108,7 +91,7 @@
 			</dd>
 		}
 
-	</dl>
+		</dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ClaimId }) |

@@ -14,20 +14,20 @@ namespace ClaimSystem.Controllers
     public class CustomersClaimsController : Controller
     {
         private readonly RepositoryEF<Claim> _claims;
-        private readonly RepositoryEF<ClaimPriority> _claimPriorities;
-        private readonly RepositoryEF<ClaimState> _claimsStates;
+        //private readonly RepositoryEF<ClaimPriority> _claimPriorities;
+        //private readonly RepositoryEF<ClaimState> _claimsStates;
         private readonly RepositoryEF<ClaimType> _claimsTypes;
         private readonly RepositoryEF<Customer> _customers;
-        private readonly RepositoryEF<Employee> _employees;
+        //private readonly RepositoryEF<Employee> _employees;
 
         public CustomersClaimsController()
         {
             var dbContext = new AppDbContext();
             _claims = new RepositoryEF<Claim>(dbContext);
             _customers = new RepositoryEF<Customer>(dbContext);
-            _employees = new RepositoryEF<Employee>(dbContext);
-            _claimPriorities = new RepositoryEF<ClaimPriority>(dbContext);
-            _claimsStates = new RepositoryEF<ClaimState>(dbContext);
+            //_employees = new RepositoryEF<Employee>(dbContext);
+            //_claimPriorities = new RepositoryEF<ClaimPriority>(dbContext);
+            //_claimsStates = new RepositoryEF<ClaimState>(dbContext);
             _claimsTypes = new RepositoryEF<ClaimType>(dbContext);
         }
 
@@ -64,6 +64,10 @@ namespace ClaimSystem.Controllers
             if (ModelState.IsValid)
             {
                 Claim.StartDate = DateTime.Now;
+                Claim.ClaimStateId = 1;
+                Claim.ClaimPriorityId = 1;
+                Claim.Customer = _customers.Get(cu => cu.Email == User.Identity.Name).FirstOrDefault();
+
                 _claims.Insert(Claim);
                 _claims.SaveObjects();
                 return RedirectToAction("Index");
@@ -108,6 +112,31 @@ namespace ClaimSystem.Controllers
             return View(Claim);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Liked(int id, bool like)
+        {
+            Claim Claim = _claims.Get(c => c.Customer.Email == User.Identity.Name && c.ClaimId == id, null, null).FirstOrDefault();
+            Claim.Liked = like;
+            _claims.Update(Claim);
+            _claims.SaveObjects();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reopen(int id)
+        {
+            Claim Claim = _claims.Get(c => c.Customer.Email == User.Identity.Name && c.ClaimId == id, null, null).FirstOrDefault();
+            Claim.Liked = null;
+            Claim.ClaimStateId = 4;
+            Claim.ClaimPriorityId = 3;
+
+            _claims.Update(Claim);
+            _claims.SaveObjects();
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -131,6 +160,7 @@ namespace ClaimSystem.Controllers
             _claims.SaveObjects();
             return RedirectToAction("Index");
         }
+
 
     }
 }

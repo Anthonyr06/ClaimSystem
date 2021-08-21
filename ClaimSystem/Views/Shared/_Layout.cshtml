@@ -26,6 +26,13 @@
 							@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = current == "Home" ? active : "nav-link" })
 						</li>
 
+						@if (User.IsInRole("Customer"))
+						{
+							<li class="nav-item">
+								@Html.ActionLink("Mis Reclamaciones", "Index", "CustomersClaims", null, new { @class = current == "CustomersClaimsClaims" ? active : "nav-link" })
+							</li>
+						}
+
 						@if (User.IsInRole("Employee"))
 						{
 							<li class="nav-item">

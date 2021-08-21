@@ -11,7 +11,7 @@ namespace ClaimSystem.Models
     public class ClaimState
     {
         public int ClaimStateId { get; set; }
-        [Required, MaxLength(500, ErrorMessage = "Maximo 500 caracteres")]
+        [Required, MaxLength(500, ErrorMessage = "Maximo 500 caracteres"), Display(Name = "Descripcion")]
         public string Desc { get; set; }
 
         public IList<Claim> Claims { get; set; }

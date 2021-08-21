@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h3 class="mt-4">Reclamacions de los clientes</h3>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class= "btn btn-success  rounded-pill" })
 </p>
 <table class="table">
 	<tr>
@@ -62,6 +62,10 @@
 		@Html.DisplayFor(modelItem => item.Dish)
 	</td>
 	<td>
+		@if (item.Employee == null)
+		{
+			<p>Por Asignar</p>
+		}
 		@Html.DisplayFor(modelItem => item.Employee.FullName)
 	</td>
 	<td>

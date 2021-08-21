@@ -4,7 +4,15 @@
 	ViewBag.Title = "Iniciar Sesion";
 }
 @*<img src="~/Content/Images/bg-inbox.svg" style="position: fixed; top: 0; left: 0; min-width: 100%; min-height: 100%; " id="bg" alt="">*@
-
+<style>
+	html {
+		background: url(/Content/Images/bg-inbox.svg) no-repeat center center fixed !important;
+		-webkit-background-size: cover !important;
+		-moz-background-size: cover !important;
+		-o-background-size: cover !important;
+		background-size: cover !important;
+	}
+</style>
 @using (Html.BeginForm())
 {
 	@Html.AntiForgeryToken()

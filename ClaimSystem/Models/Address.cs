@@ -12,15 +12,15 @@ namespace ClaimSystem.Models
     {
         public int AddressId { get; set; }
         public AddressType AddressType { get; set; }
-        [Required]
+        [Required, Display(Name = "No.")]
         public int Number { get; set; }
-        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
+        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres"), Display(Name = "Calle")]
         public string Street { get; set; }
-        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
+        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres"), Display(Name = "Urbanizacion")]
         public string Neighborhood { get; set; }
-        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
+        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres"), Display(Name = "Ciudad")]
         public string City { get; set; }
-        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
+        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres"), Display(Name = "Pais")]
         public string Country { get; set; }
 
         public IList<Customer> Customers { get; set; }

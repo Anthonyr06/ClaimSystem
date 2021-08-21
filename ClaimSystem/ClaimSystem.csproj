@@ -150,6 +150,10 @@
     <Compile Include="Data\Migrations\202108202028218_InitialMigration.designer.cs">
       <DependentUpon>202108202028218_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Migrations\202108210623167_LikedFieldClaims.cs" />
+    <Compile Include="Data\Migrations\202108210623167_LikedFieldClaims.designer.cs">
+      <DependentUpon>202108210623167_LikedFieldClaims.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -185,6 +189,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\Images\001-dislike.png" />
+    <Content Include="Content\Images\002-like.png" />
     <Content Include="Content\Images\bg-inbox.svg" />
     <Content Include="Content\Images\proceso-quejas.png" />
     <Content Include="favicon.ico" />
@@ -289,6 +295,11 @@
     <Content Include="Views\Positions\Edit.cshtml" />
     <Content Include="Views\Positions\Index.cshtml" />
     <Content Include="Views\Account\Admin.cshtml" />
+    <Content Include="Views\CustomersClaims\Create.cshtml" />
+    <Content Include="Views\CustomersClaims\Delete.cshtml" />
+    <Content Include="Views\CustomersClaims\Details.cshtml" />
+    <Content Include="Views\CustomersClaims\Edit.cshtml" />
+    <Content Include="Views\CustomersClaims\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -301,6 +312,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Data\Migrations\202108202028218_InitialMigration.resx">
       <DependentUpon>202108202028218_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\Migrations\202108210623167_LikedFieldClaims.resx">
+      <DependentUpon>202108210623167_LikedFieldClaims.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

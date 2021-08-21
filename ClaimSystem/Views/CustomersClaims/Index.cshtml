@@ -1,0 +1,145 @@
+﻿@model IEnumerable<ClaimSystem.Models.Claim>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.ClaimState)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.ClaimType)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Dish)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Employee)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Desc)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.StartDate)
+		</th>
+
+		<th>
+			@if (Model.Any(c => c.SolutionDate != null))
+			{
+				@Html.DisplayNameFor(model => model.SolutionDate)
+			}
+		</th>
+
+		<th>
+			@if (Model.Any(c => !string.IsNullOrEmpty(c.Solution)))
+			{
+				@Html.DisplayNameFor(model => model.Solution)
+			}
+		</th>
+
+		<th></th>
+	</tr>
+
+@foreach (var item in Model) {
+<tr>
+	<td>
+		@Html.DisplayFor(modelItem => item.ClaimState.Desc)
+	</td>
+	<td>
+		@Html.DisplayFor(modelItem => item.ClaimType.Desc)
+	</td>
+	<td>
+		@Html.DisplayFor(modelItem => item.Dish)
+	</td>
+
+	<td>
+		@if (item.Employee == null)
+		{
+			<p>Por Asignar</p>
+		}
+		@Html.DisplayFor(modelItem => item.Employee.FullName)
+	</td>
+
+	<td>
+		@Html.DisplayFor(modelItem => item.Desc)
+	</td>
+	<td>
+		@Html.DisplayFor(modelItem => item.StartDate)
+	</td>
+
+
+	<td>
+		@if (item.SolutionDate != null)
+		{
+			@Html.DisplayFor(modelItem => item.SolutionDate)
+		}
+	</td>
+
+	<td>
+		@if (!string.IsNullOrEmpty(item.Solution))
+		{
+			@Html.DisplayFor(modelItem => item.Solution)
+		}
+	</td>
+
+	<td>
+		@if (item.ClaimState.Desc.Equals("Cerrada"))
+		{
+
+			if (item.Liked == true)
+			{
+				<img src="~/Content/Images/002-like.png" width="40" />
+			}
+			else if (item.Liked == false)
+			{
+				<img src="~/Content/Images/001-dislike.png" width="40" /><br />
+
+				using (Html.BeginForm("Reopen","CustomersClaims",new { id = item.ClaimId }))
+				{
+					@Html.AntiForgeryToken()
+					<button type="submit" class="btn btn-link btn-sm">reabrir reclamacion</button>
+				}
+			}
+			else
+			{
+				<h6>¿Como fue tu experiencia?</h6>
+				<div class="btn-group" role="group">
+					@using (Html.BeginForm("Liked", "CustomersClaims", new { id = item.ClaimId, like = true }))
+					{
+						@Html.AntiForgeryToken()
+						<button type="submit" class="btn px-1">
+							<img src="~/Content/Images/002-like.png" width="40" />
+						</button>
+					}
+
+					@using (Html.BeginForm("Liked", "CustomersClaims", new { id = item.ClaimId, like = false }))
+					{
+						@Html.AntiForgeryToken()
+						<button type="submit" class="btn px-1">
+							<img src="~/Content/Images/001-dislike.png" width="40" />
+						</button>
+					}
+
+				</div>
+			}
+
+		}
+		else
+		{
+			@Html.ActionLink("Edit", "Edit", new { id = item.ClaimId });<br />
+			@Html.ActionLink("Details", "Details", new { id = item.ClaimId });<br />
+			@Html.ActionLink("Delete", "Delete", new { id = item.ClaimId });
+
+		}
+	</td>
+</tr>
+}
+
+</table>

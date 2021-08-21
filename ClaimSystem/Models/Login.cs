@@ -11,7 +11,7 @@ namespace ClaimSystem.Models
         [Required, StringLength(254)]
         public string Email { get; set; }
         [Required]
-        [DataType(DataType.Password)]
+        [DataType(DataType.Password), Display(Name = "Contraseña")]
         public string Password { get; set; }
     }
 }

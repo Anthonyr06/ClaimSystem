@@ -57,7 +57,7 @@ namespace ClaimSystem.Controllers
         // POST: Positions/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PositionId,Name,Desc,Salary,Rank,DepartmentId")] Position position)
+        public ActionResult Create([Bind(Include = "PositionId,Name,Desc,Salary,DepartmentId")] Position position)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,6 @@ namespace ClaimSystem.Controllers
                 p.Name = position.Name;
                 p.Desc = position.Desc;
                 p.Salary = position.Salary;
-                p.Rank = position.Rank;
                 p.DepartmentId = position.DepartmentId;
 
                 _positions.Update(p);

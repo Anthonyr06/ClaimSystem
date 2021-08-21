@@ -12,12 +12,12 @@ namespace ClaimSystem.Models
     {
         [Key]
         public int EmployeeId { get; set; }
-        [Required, StringLength(11)]
+        [Required, MaxLength(11, ErrorMessage = "Maximo {1} caracteres. Sin guiones")]
         public string Cedula { get; set; }
 
-        [Required, MaxLength(100, ErrorMessage = "Maximo 100 caracteres")]
+        [Required, MaxLength(100, ErrorMessage = "Maximo {1} caracteres")]
         public string Name { get; set; }
-        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
+        [Required, MaxLength(200, ErrorMessage = "Maximo {1} caracteres")]
         public string LastName { get; set; }
         [Required, StringLength(254)]
         public string Email { get; set; }
@@ -38,5 +38,9 @@ namespace ClaimSystem.Models
         public Address Address { get; set; }
 
         public IList<Claim> Claims { get; set; }
+
+
+        [NotMapped]
+        public string FullName => string.Format("{0} {1}", Name, LastName);
     }
 }

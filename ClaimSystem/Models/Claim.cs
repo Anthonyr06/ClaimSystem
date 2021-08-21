@@ -11,6 +11,8 @@ namespace ClaimSystem.Models
     public class Claim
     {
         public int ClaimId { get; set; }
+        [Required, MaxLength(100, ErrorMessage = "Maximo 100 caracteres"), Display(Name = "Plato/Bebida")]
+        public string Dish { get; set; }
         [Required, MaxLength(500, ErrorMessage = "Maximo 500 caracteres"),Display(Name = "Descripcion")]
         public string Desc { get; set; }
         [Required]
@@ -30,7 +32,7 @@ namespace ClaimSystem.Models
         public int ClaimPriorityId { get; set; }
         public ClaimPriority ClaimPriority { get; set; }
 
-        public int EmployeeId { get; set; }
+        public int? EmployeeId { get; set; }
         public Employee Employee { get; set; }
 
         public int CustomerId { get; set; }

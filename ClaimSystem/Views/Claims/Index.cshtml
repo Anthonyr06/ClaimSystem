@@ -10,72 +10,80 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ClaimPriority)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ClaimState)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ClaimType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Customer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Employee)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Desc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SolutionDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Solution)
-        </th>
-        <th></th>
-    </tr>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.ClaimPriority)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.ClaimState)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.ClaimType)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Customer)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Dish)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Employee)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Desc)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.StartDate)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.SolutionDate)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Solution)
+		</th>
+		<th></th>
+	</tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClaimPriority.Desc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClaimState.Desc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClaimType.Desc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer.Cedula)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee.Cedula)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SolutionDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Solution)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ClaimId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ClaimId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ClaimId })
-        </td>
-    </tr>
+<tr>
+	<td>
+		@Html.DisplayFor(modelItem => item.ClaimPriority.Desc)
+	</td>
+	<td>
+		@Html.DisplayFor(modelItem => item.ClaimState.Desc)
+	</td>
+	<td>
+		@Html.DisplayFor(modelItem => item.ClaimType.Desc)
+	</td>
+	<td>
+		@Html.DisplayFor(modelItem => item.Customer.FullName)
+	</td>
+	<td>
+		@Html.DisplayFor(modelItem => item.Dish)
+	</td>
+	<td>
+		@Html.DisplayFor(modelItem => item.Employee.FullName)
+	</td>
+	<td>
+		@Html.DisplayFor(modelItem => item.Desc)
+	</td>
+	<td>
+		@Html.DisplayFor(modelItem => item.StartDate)
+	</td>
+	<td>
+		@if (item.SolutionDate == null) { <text>N/A</text> }
+		@Html.DisplayFor(modelItem => item.SolutionDate)
+	</td>
+	<td>
+		@if(string.IsNullOrEmpty(item.Solution)){<text>N/A</text>}
+		@Html.DisplayFor(modelItem => item.Solution)
+	</td>
+	<td>
+		@Html.ActionLink("Edit", "Edit", new { id = item.ClaimId }) |
+		@Html.ActionLink("Details", "Details", new { id = item.ClaimId }) |
+		@Html.ActionLink("Delete", "Delete", new { id = item.ClaimId })
+	</td>
+</tr>
 }
 
 </table>

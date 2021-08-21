@@ -32,6 +32,13 @@ namespace ClaimSystem.Models
         public int? AddressId { get; set; }
         public Address Address { get; set; }
 
+        [DataType(DataType.Date)]
+        public DateTime EnrollmentDate { get; set; }
+
         public IList<Claim> Claims { get; set; }
+
+        [NotMapped]
+        public string FullName => string.Format("{0} {1}", Name, LastName);
+
     }
 }

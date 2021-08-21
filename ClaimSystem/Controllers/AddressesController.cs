@@ -54,7 +54,7 @@ namespace ClaimSystem.Controllers
         // POST: Addresses/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AddressId,AddressType,Number,Neighborhood,City,Country")] Address address)
+        public ActionResult Create([Bind(Include = "AddressId,AddressType,Number,Street,Neighborhood,City,Country")] Address address)
         {
             if (ModelState.IsValid)
             {
@@ -92,6 +92,7 @@ namespace ClaimSystem.Controllers
                 a.City = address.City;
                 a.Country = address.Country;
                 a.Neighborhood = address.Neighborhood;
+                a.Street = address.Street;
                 a.Number = address.Number;
 
                 _addresses.Update(a);

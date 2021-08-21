@@ -10,80 +10,96 @@
 <div>
     <h4>Claim</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ClaimPriority)
-        </dt>
+	<dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.ClaimPriority)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Dish)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ClaimState)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.Dish)
+		</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ClaimState)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Desc)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ClaimType)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.Desc)
+		</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ClaimType)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.ClaimPriority)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.ClaimPriority.Desc)
+		</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Customer.Cedula)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.ClaimState)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Employee)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.ClaimState.Desc)
+		</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Employee.Cedula)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.ClaimType)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Desc)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.ClaimType.Desc)
+		</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Desc)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Customer)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.Customer.Cedula)
+		</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.Employee)
+		</dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SolutionDate)
-        </dt>
+		<dd>
+			@Html.DisplayFor(model => model.Employee.Cedula)
+		</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.SolutionDate)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Solution)
-        </dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.StartDate)
+		</dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Solution)
-        </dd>
+		<dd>
+			@Html.DisplayFor(model => model.StartDate)
+		</dd>
 
-    </dl>
+		@if (Model.SolutionDate != null)
+		{
+			<dt>
+				@Html.DisplayNameFor(model => model.SolutionDate)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.SolutionDate)
+			</dd>
+		}
+
+		@if (!string.IsNullOrEmpty(Model.Solution))
+		{
+			<dt>
+				@Html.DisplayNameFor(model => model.Solution)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Solution)
+			</dd>
+		}
+
+	</dl>
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()

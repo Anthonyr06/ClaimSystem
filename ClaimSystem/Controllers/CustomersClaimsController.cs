@@ -1,20 +1,17 @@
-﻿using System;
+﻿using ClaimSystem.Data;
+using ClaimSystem.Models;
+using ClaimSystem.Services;
+using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ClaimSystem.Models;
-using ClaimSystem.Services;
-using ClaimSystem.Data;
 
 namespace ClaimSystem.Controllers
 {
-    [Authorize(Roles = nameof(Employee))]
-    public class ClaimsController : Controller
+    [Authorize(Roles = nameof(Customer))]
+    public class CustomersClaimsController : Controller
     {
         private readonly RepositoryEF<Claim> _claims;
         private readonly RepositoryEF<ClaimPriority> _claimPriorities;
@@ -23,7 +20,7 @@ namespace ClaimSystem.Controllers
         private readonly RepositoryEF<Customer> _customers;
         private readonly RepositoryEF<Employee> _employees;
 
-        public ClaimsController()
+        public CustomersClaimsController()
         {
             var dbContext = new AppDbContext();
             _claims = new RepositoryEF<Claim>(dbContext);
@@ -34,21 +31,19 @@ namespace ClaimSystem.Controllers
             _claimsTypes = new RepositoryEF<ClaimType>(dbContext);
         }
 
-        // GET: Claims
         public ActionResult Index()
         {
-            var claims = _claims.Get(null, c => c.OrderBy(cs => cs.ClaimState.Desc), "ClaimPriority,ClaimState,ClaimType,Customer,Employee");
+            var claims = _claims.Get(c => c.Customer.Email == User.Identity.Name, c => c.OrderBy(cs => cs.ClaimState.Desc), "ClaimPriority,ClaimState,ClaimType,Customer,Employee");
             return View(claims);
         }
 
-        // GET: Claims/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Claim Claim = _claims.Get(c => c.ClaimId == id, null, "ClaimPriority,ClaimState,ClaimType,Customer,Employee").FirstOrDefault();
+            Claim Claim = _claims.Get(c => c.Customer.Email == User.Identity.Name && c.ClaimId == id, null, "ClaimPriority,ClaimState,ClaimType,Customer,Employee").FirstOrDefault();
             if (Claim == null)
             {
                 return HttpNotFound();
@@ -56,94 +51,70 @@ namespace ClaimSystem.Controllers
             return View(Claim);
         }
 
-        // GET: Claims/Create
         public ActionResult Create()
         {
-            ViewBag.ClaimPriorityId = new SelectList(_claimPriorities.Get(), "ClaimPriorityId", "Desc");
-            ViewBag.ClaimStateId = new SelectList(_claimsStates.Get(), "ClaimStateId", "Desc");
             ViewBag.ClaimTypeId = new SelectList(_claimsTypes.Get(), "ClaimTypeId", "Desc");
-            ViewBag.CustomerId = new SelectList(_customers.Get(), "CustomerId", "Cedula");
             return View();
         }
 
-        // POST: Claims/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Dish,Desc,ClaimTypeId,ClaimStateId,ClaimPriorityId,CustomerId")] Claim Claim)
+        public ActionResult Create([Bind(Include = "Dish,Desc,ClaimTypeId")] Claim Claim)
         {
             if (ModelState.IsValid)
             {
-                Claim.Employee = _employees.Get(e => e.Email == User.Identity.Name).FirstOrDefault();
                 Claim.StartDate = DateTime.Now;
                 _claims.Insert(Claim);
                 _claims.SaveObjects();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ClaimPriorityId = new SelectList(_claimPriorities.Get(), "ClaimPriorityId", "Desc", Claim.ClaimPriorityId);
-            ViewBag.ClaimStateId = new SelectList(_claimsStates.Get(), "ClaimStateId", "Desc", Claim.ClaimStateId);
             ViewBag.ClaimTypeId = new SelectList(_claimsTypes.Get(), "ClaimTypeId", "Desc", Claim.ClaimTypeId);
-            ViewBag.CustomerId = new SelectList(_customers.Get(), "CustomerId", "Cedula", Claim.CustomerId);
             return View(Claim);
         }
 
-        // GET: Claims/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Claim Claim = _claims.GetByID(id);
+            Claim Claim = _claims.Get(c => c.Customer.Email == User.Identity.Name && c.ClaimId == id, null, null).FirstOrDefault();
             if (Claim == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ClaimPriorityId = new SelectList(_claimPriorities.Get(), "ClaimPriorityId", "Desc", Claim.ClaimPriorityId);
-            ViewBag.ClaimStateId = new SelectList(_claimsStates.Get(), "ClaimStateId", "Desc", Claim.ClaimStateId);
             ViewBag.ClaimTypeId = new SelectList(_claimsTypes.Get(), "ClaimTypeId", "Desc", Claim.ClaimTypeId);
-            ViewBag.CustomerId = new SelectList(_customers.Get(), "CustomerId", "Cedula", Claim.CustomerId);
             return View(Claim);
         }
 
-        // POST: Claims/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Claim Claim)
         {
             if (ModelState.IsValid)
             {
-                Claim c = _claims.GetByID(Claim.ClaimId);
+                Claim c = _claims.Get(cl => cl.Customer.Email == User.Identity.Name && cl.ClaimId == Claim.ClaimId, null, null).FirstOrDefault();
                 c.Dish = Claim.Dish;
                 c.Desc = Claim.Desc;
-                c.SolutionDate = Claim.SolutionDate;
-                c.Solution = Claim.Solution;
                 c.ClaimTypeId = Claim.ClaimTypeId;
-                c.ClaimStateId = Claim.ClaimStateId;
-                c.ClaimPriorityId = Claim.ClaimPriorityId;
-                c.CustomerId = Claim.CustomerId;
-
-                if (c.EmployeeId == null) c.Employee = _employees.Get(e => e.Email == User.Identity.Name).FirstOrDefault();
+                c.Customer = _customers.Get(cu => cu.Email == User.Identity.Name).FirstOrDefault();
 
                 _claims.Update(c);
                 _claims.SaveObjects();
                 return RedirectToAction("Index");
             }
-            ViewBag.ClaimPriorityId = new SelectList(_claimPriorities.Get(), "ClaimPriorityId", "Desc", Claim.ClaimPriorityId);
-            ViewBag.ClaimStateId = new SelectList(_claimsStates.Get(), "ClaimStateId", "Desc", Claim.ClaimStateId);
             ViewBag.ClaimTypeId = new SelectList(_claimsTypes.Get(), "ClaimTypeId", "Desc", Claim.ClaimTypeId);
-            ViewBag.CustomerId = new SelectList(_customers.Get(), "CustomerId", "Cedula", Claim.CustomerId);
             return View(Claim);
         }
 
-        // GET: Claims/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Claim Claim = _claims.Get(c => c.ClaimId == id, null, "ClaimPriority,ClaimState,ClaimType,Customer,Employee").FirstOrDefault();
+            Claim Claim = _claims.Get(c => c.Customer.Email == User.Identity.Name && c.ClaimId == id, null, "ClaimPriority,ClaimState,ClaimType,Customer,Employee").FirstOrDefault();
             if (Claim == null)
             {
                 return HttpNotFound();
@@ -151,15 +122,15 @@ namespace ClaimSystem.Controllers
             return View(Claim);
         }
 
-        // POST: Claims/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Claim Claim = _claims.GetByID(id);
+            Claim Claim = _claims.Get(c => c.Customer.Email == User.Identity.Name && c.ClaimId == id, null, null).FirstOrDefault(); 
             _claims.Delete(Claim);
             _claims.SaveObjects();
             return RedirectToAction("Index");
         }
+
     }
 }

@@ -16,8 +16,6 @@ namespace ClaimSystem.Models
         [Required, MaxLength(500, ErrorMessage = "Maximo 500 caracteres")]
         public string Desc { get; set; }
         public int Salary { get; set; }
-        [Required, MaxLength(50, ErrorMessage = "Maximo 50 caracteres")]
-        public string Rank { get; set; }
 
         public int DepartmentId { get; set; }
         public Department Department { get; set; }

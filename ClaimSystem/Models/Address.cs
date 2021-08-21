@@ -15,6 +15,8 @@ namespace ClaimSystem.Models
         [Required]
         public int Number { get; set; }
         [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
+        public string Street { get; set; }
+        [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
         public string Neighborhood { get; set; }
         [Required, MaxLength(200, ErrorMessage = "Maximo 200 caracteres")]
         public string City { get; set; }
@@ -25,15 +27,15 @@ namespace ClaimSystem.Models
         public IList<Employee> Employees  { get; set; }
 
         [NotMapped]
-        public string FullAddress => string.Format("{0} #{1}, {2}, {3}, {4} ", AddressType.ToString(), Number, Neighborhood, City, Country);
+        public string FullAddress => string.Format("C/{5} {0} #{1}, {2}, {3}, {4} ", AddressType.ToString(), Number, Neighborhood, City, Country, Street);
 
     }
 
     public enum AddressType
     {
         [Display(Name = "Casa")]
-        house = 0,
+        Casa = 0,
         [Display(Name = "Apartamento")]
-        depto = 1 
+        Depto = 1 
     }
 }

@@ -71,6 +71,7 @@ namespace ClaimSystem.Controllers
                 {
                     customer.Password = MD5Service.GetMD5(customer.Password);
                     customer.Address = _addresses.GetByID(customer.AddressId);
+                    customer.EnrollmentDate = DateTime.Now;
                     _customers.Insert(customer);
                     _customers.SaveObjects();
                     return RedirectToAction("Index");

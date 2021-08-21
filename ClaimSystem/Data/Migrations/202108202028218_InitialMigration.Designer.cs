@@ -7,13 +7,13 @@ namespace ClaimSystem.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class DeptoTableUpdated : IMigrationMetadata
+    public sealed partial class InitialMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(DeptoTableUpdated));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202107171245194_DeptoTableUpdated"; }
+            get { return "202108202028218_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

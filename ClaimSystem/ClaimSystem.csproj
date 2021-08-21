@@ -132,6 +132,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressesController.cs" />
+    <Compile Include="Controllers\CustomersClaimsController.cs" />
     <Compile Include="Controllers\ClaimPrioritiesController.cs" />
     <Compile Include="Controllers\ClaimStatesController.cs" />
     <Compile Include="Controllers\ClaimTypesController.cs" />
@@ -145,25 +146,9 @@
     <Compile Include="Data\Configurations\CustomerConfig.cs" />
     <Compile Include="Data\Configurations\EmployeeConfig.cs" />
     <Compile Include="Data\Configurations\PositionConfig.cs" />
-    <Compile Include="Data\Migrations\202106200837411_InitialMigration.cs" />
-    <Compile Include="Data\Migrations\202106200837411_InitialMigration.designer.cs">
-      <DependentUpon>202106200837411_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Migrations\202106202228340_ClaimSolutionNoRequired.cs" />
-    <Compile Include="Data\Migrations\202106202228340_ClaimSolutionNoRequired.designer.cs">
-      <DependentUpon>202106202228340_ClaimSolutionNoRequired.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Migrations\202107171245194_DeptoTableUpdated.cs" />
-    <Compile Include="Data\Migrations\202107171245194_DeptoTableUpdated.designer.cs">
-      <DependentUpon>202107171245194_DeptoTableUpdated.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Migrations\202107180410068_AddressIdFKFieldDropped.cs" />
-    <Compile Include="Data\Migrations\202107180410068_AddressIdFKFieldDropped.designer.cs">
-      <DependentUpon>202107180410068_AddressIdFKFieldDropped.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Migrations\202107180420066_AddressRelationFixed.cs" />
-    <Compile Include="Data\Migrations\202107180420066_AddressRelationFixed.designer.cs">
-      <DependentUpon>202107180420066_AddressRelationFixed.cs</DependentUpon>
+    <Compile Include="Data\Migrations\202108202028218_InitialMigration.cs" />
+    <Compile Include="Data\Migrations\202108202028218_InitialMigration.designer.cs">
+      <DependentUpon>202108202028218_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\Migrations\Configuration.cs" />
     <Compile Include="Global.asax.cs">
@@ -314,20 +299,8 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Migrations\202106200837411_InitialMigration.resx">
-      <DependentUpon>202106200837411_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\202106202228340_ClaimSolutionNoRequired.resx">
-      <DependentUpon>202106202228340_ClaimSolutionNoRequired.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\202107171245194_DeptoTableUpdated.resx">
-      <DependentUpon>202107171245194_DeptoTableUpdated.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\202107180410068_AddressIdFKFieldDropped.resx">
-      <DependentUpon>202107180410068_AddressIdFKFieldDropped.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Data\Migrations\202107180420066_AddressRelationFixed.resx">
-      <DependentUpon>202107180420066_AddressRelationFixed.cs</DependentUpon>
+    <EmbeddedResource Include="Data\Migrations\202108202028218_InitialMigration.resx">
+      <DependentUpon>202108202028218_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
